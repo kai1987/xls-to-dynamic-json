@@ -71,10 +71,10 @@ readOneToMany=(fileName,sheetName,forginerKeyName,forginerKeyValue)->
 
   return iret
 
-make_dynamic_json=(fileName,sheetName,outputJsonName=sheetName)->
+make_dynamic_json=(fileName,sheetName,outputJsonName=sheetName+".json")->
   json = convertJson(fileName,sheetName)
   return console.error "no json converted:fileName:#{fileName},sheetName:#{sheetName}" unless json
-  fs.writeFileSync(outputJsonName+".json",JSON.stringify(json,null,2))
+  fs.writeFileSync(outputJsonName,JSON.stringify(json,null,2))
   return json
 
 
