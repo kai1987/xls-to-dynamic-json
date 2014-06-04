@@ -1,0 +1,32 @@
+{
+  "name": "xls-to-dynamic-json",
+  "version": "0.0.1",
+  "description": "convert xls to dynamic json",
+  "dependencies": {
+    "xlsjs":""
+  },
+  "devDependencies": {
+    "mocha":"",
+    "should":""
+  },
+  "main": "xls2json.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kai1987/xls-to-dynamic-json.git"
+  },
+  "keywords": [
+    "xls",
+    "xlsx",
+    "to",
+    "json"
+  ],
+  "author": "kai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kai1987/xls-to-dynamic-json/issues"
+  },
+  "homepage": "https://github.com/kai1987/xls-to-dynamic-json"
+}
