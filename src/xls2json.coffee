@@ -1,3 +1,5 @@
+#this class convert xls to json.
+
 xls = require "xlsjs"
 
 
