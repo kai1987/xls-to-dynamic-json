@@ -103,6 +103,7 @@
       return console.error("no json converted:fileName:" + fileName + ",sheetName:" + sheetName);
     }
     fs.writeFileSync(outputJsonName, JSON.stringify(json, null, 2));
+    console.log("make_dynamic_json success:outputJson->:" + outputJsonName);
     return json;
   };
 
