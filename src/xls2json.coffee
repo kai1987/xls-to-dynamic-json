@@ -3,6 +3,7 @@
 xls = require "xlsjs"
 fs = require "fs"
 
+xlsx = require "xlsx"
 
 VALIDATION_KEY="key"
 VALIDATION_UNIQUE="unique"
@@ -12,16 +13,21 @@ TYPE_ONE_TO_MANY="oneToMany"
 
 #将xls解析成json. 会将xlsjs生成的json 数组转成key在外的对象，并且会对第三行定义的类型进行处理，int值会转化
 #xls 结构如下：
-#第一行:json object key 
+#第一行:json object key
 #第二行:描述
 #第三行:类型定义:oneToMany的结构如下：oneToMany,关联的工作簿文件名,sheetName,在sheetName中的外键的名字
 #第四行:验证用:key 表示是主键，unique 表示这一列要唯一
 #eg bookshop.xls
 convertJson = (fileName,sheetName)->
-  workbook = xls.readFile(fileName)
+  fileArr = fileName.split(".")
+  if fileArr[fileArr.length-1] is 'xlsx'
+    read=xlsx
+  else
+    read = xls
+  workbook = read.readFile(fileName)
   sheet = workbook.Sheets[sheetName]
 
-  rawJson = xls.utils.make_json(sheet)
+  rawJson = read.utils.make_json(sheet)
   return unless rawJson
 
   meta_data = rawJson[1]
@@ -34,7 +40,7 @@ convertJson = (fileName,sheetName)->
     key=0
     for k,v of validation
       continue unless v and v.length>0
-      if v is VALIDATION_KEY 
+      if v is VALIDATION_KEY
         key=obj[k]
 
       if v is VALIDATION_KEY or v is VALIDATION_UNIQUE

@@ -9,7 +9,7 @@
   describe("xls should been converted", function() {
     return it("should success", function(done) {
       var json;
-      json = xls2json.make_dynamic_json("bookshop.xls", "category");
+      json = xls2json.make_dynamic_json("bookshop.xlsx", "category");
       console.log("===================");
       console.dir(json);
       json.should.be.json;
