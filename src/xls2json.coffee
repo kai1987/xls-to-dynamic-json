@@ -10,6 +10,20 @@ VALIDATION_UNIQUE="unique"
 
 TYPE_INT="int"
 TYPE_ONE_TO_MANY="oneToMany"
+TYPE_HASH_CODE="hashcode"
+
+
+bkdrhash=(str)->
+  seed=31
+  hash=0
+  for v in str
+    hash = hash*seed + v.charCodeAt(0)
+    hash = hash&0x7fffffff
+
+  return hash
+
+
+
 
 #将xls解析成json. 会将xlsjs生成的json 数组转成key在外的对象，并且会对第三行定义的类型进行处理，int值会转化
 #xls 结构如下：
@@ -38,15 +52,6 @@ convertJson = (fileName,sheetName)->
   for obj in rawJson
 
     key=0
-    for k,v of validation
-      continue unless v and v.length>0
-      if v is VALIDATION_KEY
-        key=obj[k]
-
-      if v is VALIDATION_KEY or v is VALIDATION_UNIQUE
-        validationTemp[k] or=[]
-        return console.error "dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]}" if obj[k] in validationTemp[k]
-        validationTemp[k].push obj[k]
 
     for k,v of meta_data
       continue unless v and v.length>0
@@ -57,6 +62,19 @@ convertJson = (fileName,sheetName)->
         [nouse,fileName,sheetName,forginerKeyName]=v.split(",")
         obj[k]=readOneToMany(fileName,sheetName,forginerKeyName,key)
 
+      if v.indexOf(TYPE_HASH_CODE)>-1
+        [nouse,targetStr]=v.split(",")
+        obj[k] = bkdrhash obj[targetStr]
+
+    for k,v of validation
+      continue unless v and v.length>0
+      if v is VALIDATION_KEY
+        key=obj[k]
+
+      if v is VALIDATION_KEY or v is VALIDATION_UNIQUE
+        validationTemp[k] or=[]
+        return console.error "dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]},obj:#{JSON.stringify(obj)}" if obj[k] in validationTemp[k]
+        validationTemp[k].push obj[k]
     newJson[key] = obj
 
   return newJson
