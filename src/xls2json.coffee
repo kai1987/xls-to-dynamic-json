@@ -11,7 +11,11 @@ VALIDATION_UNIQUE="unique"
 TYPE_INT="int"
 TYPE_ONE_TO_MANY="oneToMany"
 TYPE_HASH_CODE="hashcode"
+TYPE_JSON="json"
 
+#如果key等于key 话，构建k-v的json
+SPECIAL_KEY="special_key"
+SPECIAL_VALUE="value"
 
 bkdrhash=(str)->
   seed=31
@@ -49,23 +53,35 @@ convertJson = (fileName,sheetName)->
   rawJson.splice(0,3)
   validationTemp = {}
   newJson = {}
+
+  #开始解析每一条数据
   for obj in rawJson
 
     key=0
-
+    #根据meta_data将类型进行转换
     for k,v of meta_data
       continue unless v and v.length>0
       if v is TYPE_INT
         obj[k] = parseInt(obj[k],10)
 
+      #如果是oneToMany 就递归调用另一个表
       if v.indexOf(TYPE_ONE_TO_MANY)>-1
         [nouse,fileName,sheetName,forginerKeyName]=v.split(",")
         obj[k]=readOneToMany(fileName,sheetName,forginerKeyName,key)
 
+      #如果是hashcode 根据指定的字段来算hashcode
       if v.indexOf(TYPE_HASH_CODE)>-1
         [nouse,targetStr]=v.split(",")
         obj[k] = bkdrhash obj[targetStr]
+      #如果是json ,将字符串转成json
+      if v is TYPE_JSON
+        try
+          obj[k]=JSON.parse(obj[k])
+        catch err
+          console.error err
+          obj[k]=obj[k]
 
+    #根据验证的配置来验证数据，现在只有unique验证
     for k,v of validation
       continue unless v and v.length>0
       if v is VALIDATION_KEY
@@ -75,7 +91,12 @@ convertJson = (fileName,sheetName)->
         validationTemp[k] or=[]
         return console.error "dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]},obj:#{JSON.stringify(obj)}" if obj[k] in validationTemp[k]
         validationTemp[k].push obj[k]
-    newJson[key] = obj
+
+    #如果是指定的key,v结构的话，生成的json中的value不在被对象包裹，而是直接生成k-v结构
+    if key is obj[SPECIAL_KEY]
+      newJson[key]=obj[SPECIAL_VALUE]
+    else
+      newJson[key] = obj
 
   return newJson
 
