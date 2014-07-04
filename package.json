@@ -4,7 +4,8 @@
   "description": "convert xls to dynamic json",
   "dependencies": {
     "xlsjs":"",
-    "xlsx":""
+    "xlsx":"",
+    "commander":""
   },
   "devDependencies": {
     "mocha":"",
