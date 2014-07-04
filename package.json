@@ -29,5 +29,6 @@
   "bugs": {
     "url": "https://github.com/kai1987/xls-to-dynamic-json/issues"
   },
-  "homepage": "https://github.com/kai1987/xls-to-dynamic-json"
+  "homepage": "https://github.com/kai1987/xls-to-dynamic-json",
+  {"bin":{"x2j":"./x2j.njs"}}
 }
