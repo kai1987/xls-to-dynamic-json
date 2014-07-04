@@ -30,6 +30,10 @@ xls-to-dynamic-json.make_dynamic_json(fileName,sheetName,outputJsonName)
 
 直接命令行调用:
 
-./x2j.njs fileName,sheetName,outputJsonName
+x2j.njs fileName,sheetName,outputJsonName
 
 ```
+
+安装方法:
+
+npm install xls-to-dynamic-json
