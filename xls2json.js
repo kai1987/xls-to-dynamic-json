@@ -56,6 +56,7 @@
     rawJson.splice(0, 3);
     validationTemp = {};
     newJson = {};
+    console.dir(rawJson);
     for (_i = 0, _len = rawJson.length; _i < _len; _i++) {
       obj = rawJson[_i];
       key = 0;
@@ -101,8 +102,9 @@
           validationTemp[k].push(obj[k]);
         }
       }
+      console.log("key:" + key + ",obj:" + obj[SPECIAL_KEY]);
       if (key === obj[SPECIAL_KEY]) {
-        newJson[key] = obj[SPECIAL_VALUE];
+        newJson[key] = obj[SPECIAL_VALUE] != null ? obj[SPECIAL_VALUE] : "";
       } else {
         newJson[key] = obj;
       }

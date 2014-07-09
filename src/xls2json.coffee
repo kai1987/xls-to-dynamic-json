@@ -54,6 +54,7 @@ convertJson = (fileName,sheetName)->
   validationTemp = {}
   newJson = {}
 
+  console.dir rawJson
   #开始解析每一条数据
   for obj in rawJson
 
@@ -93,8 +94,9 @@ convertJson = (fileName,sheetName)->
         validationTemp[k].push obj[k]
 
     #如果是指定的key,v结构的话，生成的json中的value不在被对象包裹，而是直接生成k-v结构
+    console.log "key:#{key},obj:#{obj[SPECIAL_KEY]}"
     if key is obj[SPECIAL_KEY]
-      newJson[key]=obj[SPECIAL_VALUE]
+      newJson[key]=if obj[SPECIAL_VALUE]? then obj[SPECIAL_VALUE] else ""
     else
       newJson[key] = obj
 
