@@ -59,6 +59,16 @@
     for (_i = 0, _len = rawJson.length; _i < _len; _i++) {
       obj = rawJson[_i];
       key = 0;
+      for (k in validation) {
+        v = validation[k];
+        if (!(v && v.length > 0)) {
+          continue;
+        }
+        if (v === VALIDATION_KEY) {
+          key = obj[k];
+          break;
+        }
+      }
       for (k in meta_data) {
         v = meta_data[k];
         if (!(v && v.length > 0)) {
@@ -87,12 +97,6 @@
       }
       for (k in validation) {
         v = validation[k];
-        if (!(v && v.length > 0)) {
-          continue;
-        }
-        if (v === VALIDATION_KEY) {
-          key = obj[k];
-        }
         if (v === VALIDATION_KEY || v === VALIDATION_UNIQUE) {
           validationTemp[k] || (validationTemp[k] = []);
           if (_ref2 = obj[k], __indexOf.call(validationTemp[k], _ref2) >= 0) {

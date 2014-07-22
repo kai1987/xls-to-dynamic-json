@@ -7,17 +7,30 @@
     "books": [
       {
         "id": 1,
-        "name": "大秦帝国",
+        "name": "大秦帝国3333",
         "category_id": 1,
         "desc": "大秦帝国大秦帝国大秦帝国大秦帝国",
-        "price": 10
+        "price": 10,
+        "pages": [
+          {
+            "id": 1,
+            "content": "大秦帝国aaaaaa",
+            "book_id": 1
+          },
+          {
+            "id": 2,
+            "content": "明朝那些bbbbbb事",
+            "book_id": 1
+          }
+        ]
       },
       {
         "id": 2,
         "name": "明朝那些事",
         "category_id": 1,
         "desc": "明朝那些事明朝那些事明朝那些事明朝那些事",
-        "price": 20
+        "price": 20,
+        "pages": []
       }
     ]
   },
@@ -39,14 +52,27 @@
         "name": "1984",
         "category_id": 3,
         "desc": "英国作家写的书",
-        "price": 30
+        "price": 30,
+        "pages": [
+          {
+            "id": 3,
+            "content": "ccccc1984",
+            "book_id": 3
+          },
+          {
+            "id": 4,
+            "content": "万寿寺ddddd",
+            "book_id": 3
+          }
+        ]
       },
       {
         "id": 4,
         "name": "万寿寺",
         "category_id": 3,
         "desc": "一个人只拥有此生此事是不够的，他还应该拥有诗意的世界。",
-        "price": 40
+        "price": 40,
+        "pages": []
       }
     ]
   },

@@ -58,6 +58,13 @@ convertJson = (fileName,sheetName)->
   for obj in rawJson
 
     key=0
+    #根据验证的配置来验证数据，现在只有unique验证
+    for k,v of validation
+      continue unless v and v.length>0
+      if v is VALIDATION_KEY
+        key=obj[k]
+        break
+
     #根据meta_data将类型进行转换
     for k,v of meta_data
       continue unless v and v.length>0
@@ -83,10 +90,6 @@ convertJson = (fileName,sheetName)->
 
     #根据验证的配置来验证数据，现在只有unique验证
     for k,v of validation
-      continue unless v and v.length>0
-      if v is VALIDATION_KEY
-        key=obj[k]
-
       if v is VALIDATION_KEY or v is VALIDATION_UNIQUE
         validationTemp[k] or=[]
         return console.error "dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]},obj:#{JSON.stringify(obj)}" if obj[k] in validationTemp[k]
