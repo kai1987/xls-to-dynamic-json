@@ -57,6 +57,8 @@ convertJson = (fileName,sheetName)->
   #开始解析每一条数据
   for obj in rawJson
 
+    delete obj['undefined']
+
     key=0
     #根据验证的配置来验证数据，现在只有unique验证
     for k,v of validation

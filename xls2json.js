@@ -58,6 +58,7 @@
     newJson = {};
     for (_i = 0, _len = rawJson.length; _i < _len; _i++) {
       obj = rawJson[_i];
+      delete obj['undefined'];
       key = 0;
       for (k in validation) {
         v = validation[k];
