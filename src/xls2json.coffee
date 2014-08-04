@@ -87,14 +87,14 @@ convertJson = (fileName,sheetName)->
         try
           obj[k]=JSON.parse(obj[k])
         catch err
-          console.error err
+          console.log "解析json失败，使用原始数据 : key #{k}->value: #{obj[k]} error:#{err}"
           obj[k]=obj[k]
 
     #根据验证的配置来验证数据，现在只有unique验证
     for k,v of validation
       if v is VALIDATION_KEY or v is VALIDATION_UNIQUE
         validationTemp[k] or=[]
-        return console.error "dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]},obj:#{JSON.stringify(obj)}" if obj[k] in validationTemp[k]
+        return console.error "唯一键冲突。dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]},obj:#{JSON.stringify(obj)}" if obj[k] in validationTemp[k]
         validationTemp[k].push obj[k]
 
     #如果是指定的key,v结构的话，生成的json中的value不在被对象包裹，而是直接生成k-v结构
