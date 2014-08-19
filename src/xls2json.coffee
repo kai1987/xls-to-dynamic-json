@@ -12,6 +12,7 @@ TYPE_INT="int"
 TYPE_ONE_TO_MANY="oneToMany"
 TYPE_HASH_CODE="hashcode"
 TYPE_JSON="json"
+TYPE_LINE_STRING='linestr'
 
 #如果key等于key 话，构建k-v的json
 SPECIAL_KEY="special_key"
@@ -25,6 +26,20 @@ bkdrhash=(str)->
     hash = hash&0x7fffffff
 
   return hash
+
+splitString = (str,len)->
+  iret=""
+  index=0
+  for v in str
+    if index>0 and index%len is 0
+      unless v in [',','.','?','!','，','。','？','！']
+        iret+="\n" if index>0 and index%len is 0
+      else
+        index--
+    index++
+    iret+=v
+  return iret
+
 
 
 
@@ -70,6 +85,11 @@ convertJson = (fileName,sheetName)->
     #根据meta_data将类型进行转换
     for k,v of meta_data
       continue unless v and v.length>0
+
+      if v.indexOf(TYPE_LINE_STRING)>-1
+        len=parseInt(v.split(",")[1])||20
+        obj[k]=splitString(obj[k],len)
+
       if v is TYPE_INT
         obj[k] = parseInt(obj[k],10)
 
