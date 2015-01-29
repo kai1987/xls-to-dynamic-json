@@ -1,6 +1,6 @@
 {
   "name": "xls-to-dynamic-json",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "convert xls to dynamic json",
   "dependencies": {
     "xlsjs":"",

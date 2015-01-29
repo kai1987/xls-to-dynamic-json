@@ -12,6 +12,7 @@ xls 结构如下：
 
 第三行:类型定义,现在支持以下类型:
   int
+  float
   string
   oneToMany:结构如下：oneToMany,关联的工作簿文件名,sheetName,在sheetName中的外键的名字
   hashcode: hashcode,目标字符串的列名. eg:hashcode,name. hashcode 使用的是bkdrhash算法
