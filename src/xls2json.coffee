@@ -9,6 +9,7 @@ VALIDATION_KEY="key"
 VALIDATION_UNIQUE="unique"
 
 TYPE_INT="int"
+TYPE_FLOAT="float"
 TYPE_ONE_TO_MANY="oneToMany"
 TYPE_HASH_CODE="hashcode"
 TYPE_JSON="json"
@@ -92,6 +93,8 @@ convertJson = (fileName,sheetName)->
 
       if v is TYPE_INT
         obj[k] = parseInt(obj[k],10)
+      if v is TYPE_FLOAT
+        obj[k] = parseFloat(obj[k])
 
       #如果是oneToMany 就递归调用另一个表
       if v.indexOf(TYPE_ONE_TO_MANY)>-1
