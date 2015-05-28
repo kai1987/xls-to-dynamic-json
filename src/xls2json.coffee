@@ -92,7 +92,7 @@ convertJson = (fileName,sheetName)->
         obj[k]=splitString(obj[k],len)
 
       if v is TYPE_INT
-        obj[k] = parseInt(obj[k],10)
+        obj[k] = parseInt(obj[k])
       if v is TYPE_FLOAT
         obj[k] = parseFloat(obj[k])
 
