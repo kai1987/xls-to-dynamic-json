@@ -105,7 +105,7 @@
           obj[k] = splitString(obj[k], len);
         }
         if (v === TYPE_INT) {
-          obj[k] = parseInt(obj[k], 10);
+          obj[k] = parseInt(obj[k]);
         }
         if (v === TYPE_FLOAT) {
           obj[k] = parseFloat(obj[k]);
