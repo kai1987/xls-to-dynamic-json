@@ -2,32 +2,52 @@
   "1": {
     "id": 1,
     "name": "历史",
-    "desc": "这个人很好,haha , djdj ,  不知。 \n   <br/>",
-    "content": "我想说这工。\n个方法只，\n是测试，测\n试一",
+    "desc": "这个人很好,haha , djdj ,  不知。 \r\n   <br/>",
     "newid": 10,
+    "hot": 10,
+    "where": "二楼",
     "books": [
       {
         "id": 1,
-        "name": "大秦帝国",
+        "name": "大秦帝国3333",
         "category_id": 1,
         "desc": "大秦帝国大秦帝国大秦帝国大秦帝国",
-        "price": 10
+        "price": 10,
+        "pages": [
+          {
+            "id": 1,
+            "content": "大秦帝国aaaaaa",
+            "book_id": 1,
+            "extra_1": 0
+          },
+          {
+            "id": 2,
+            "content": "明朝那些bbbbbb事",
+            "book_id": 1
+          }
+        ]
       },
       {
         "id": 2,
         "name": "明朝那些事",
         "category_id": 1,
         "desc": "明朝那些事明朝那些事明朝那些事明朝那些事",
-        "price": 20
+        "price": 20,
+        "pages": []
       }
-    ],
-    "hashcode": 684332
+    ]
+  },
+  "2": {
+    "id": 2,
+    "name": "政治",
+    "desc": "政治书",
+    "newid": 20,
+    "books": []
   },
   "3": {
     "id": 3,
     "name": "文学",
     "desc": "文学书",
-    "content": "我想说这个\n方法只是测\n试，测试一",
     "newid": 30,
     "books": [
       {
@@ -35,34 +55,39 @@
         "name": "1984",
         "category_id": 3,
         "desc": "英国作家写的书",
-        "price": 30
+        "price": 30,
+        "pages": [
+          {
+            "id": 3,
+            "content": "ccccc1984",
+            "book_id": 3,
+            "extra_2": "我说哪。"
+          },
+          {
+            "id": 4,
+            "content": "万寿寺ddddd",
+            "book_id": 3,
+            "extra_1": 3
+          }
+        ]
       },
       {
         "id": 4,
         "name": "万寿寺",
         "category_id": 3,
         "desc": "一个人只拥有此生此事是不够的，他还应该拥有诗意的世界。",
-        "price": 40
+        "price": 40,
+        "pages": []
       }
-    ],
-    "hashcode": 829119
+    ]
   },
   "4": {
     "id": 4,
     "name": "儿童",
     "desc": "文学书",
-    "content": "我想说这个\n方法只是测\n试，测试一\n下没什么总\n是就，可以\n提交了。哈\n哈哈哈。不\n行吗。？我\n想说这个方\n法只是测试，\n测试一下没\n什么总是就，\n可以提交了。\n哈哈哈哈。\n不行吗。？\n我想说这个\n方法只是测\n试，测试一\n下没什么总\n是就，可以\n提交了。哈\n哈哈哈。不\n行吗。？",
     "newid": 40,
-    "books": [],
-    "hashcode": 676230
-  },
-  "6": {
-    "id": 6,
-    "name": "政治",
-    "desc": "政治书",
-    "content": "！？我想说\n这个方法只\n是测试，测\n试一",
-    "newid": 60,
-    "books": [],
-    "hashcode": 831324
+    "hot": 1,
+    "where": "一楼",
+    "books": []
   }
 }

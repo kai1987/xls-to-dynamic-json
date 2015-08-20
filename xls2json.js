@@ -63,7 +63,7 @@
   };
 
   convertJson = function(fileName, sheetName) {
-    var err, fileArr, forginerKeyName, k, key, len, meta_data, newJson, nouse, obj, rawJson, read, sheet, targetStr, v, validation, validationTemp, workbook, _i, _len, _ref, _ref1, _ref2;
+    var err, fileArr, forginerKeyName, k, key, len, meta_data, newJson, nouse, obj, rawJson, read, sheet, targetStr, tk, tv, v, validation, validationTemp, workbook, _i, _len, _ref, _ref1, _ref2;
     fileArr = fileName.split(".");
     if (fileArr[fileArr.length - 1] === 'xlsx') {
       read = xlsx;
@@ -106,9 +106,15 @@
         }
         if (v === TYPE_INT) {
           obj[k] = parseInt(obj[k]);
+          if (isNaN(obj[k])) {
+            delete obj[k];
+          }
         }
         if (v === TYPE_FLOAT) {
           obj[k] = parseFloat(obj[k]);
+          if (isNaN(obj[k])) {
+            delete obj[k];
+          }
         }
         if (v.indexOf(TYPE_ONE_TO_MANY) > -1) {
           _ref = v.split(","), nouse = _ref[0], fileName = _ref[1], sheetName = _ref[2], forginerKeyName = _ref[3];
@@ -136,6 +142,12 @@
             return console.error("唯一键冲突。dumplicate unique for filename: " + fileName + ",sheetName:" + sheetName + ",key:" + k + ",value:" + obj[k] + ",obj:" + (JSON.stringify(obj)));
           }
           validationTemp[k].push(obj[k]);
+        }
+      }
+      for (tk in obj) {
+        tv = obj[tk];
+        if (tv === null) {
+          delete obj[tk];
         }
       }
       if (key === obj[SPECIAL_KEY]) {

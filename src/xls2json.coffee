@@ -93,8 +93,10 @@ convertJson = (fileName,sheetName)->
 
       if v is TYPE_INT
         obj[k] = parseInt(obj[k])
+        delete obj[k] if isNaN(obj[k])
       if v is TYPE_FLOAT
         obj[k] = parseFloat(obj[k])
+        delete obj[k] if isNaN(obj[k])
 
       #如果是oneToMany 就递归调用另一个表
       if v.indexOf(TYPE_ONE_TO_MANY)>-1
@@ -119,6 +121,10 @@ convertJson = (fileName,sheetName)->
         validationTemp[k] or=[]
         return console.error "唯一键冲突。dumplicate unique for filename: #{fileName},sheetName:#{sheetName},key:#{k},value:#{obj[k]},obj:#{JSON.stringify(obj)}" if obj[k] in validationTemp[k]
         validationTemp[k].push obj[k]
+
+    #将value null的数据全部删除
+    for tk,tv of obj
+      delete obj[tk] if tv is null
 
     #如果是指定的key,v结构的话，生成的json中的value不在被对象包裹，而是直接生成k-v结构
     if key is obj[SPECIAL_KEY]
